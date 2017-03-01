@@ -16,10 +16,14 @@ h2 {
   font-size: 30px; }
 
 header {
-  display: inline-block;
   position: relative;
-  width: 100%;
-  margin: auto; }
+  margin: auto;
+  background-color: #156BB8;
+  margin-top: 150px;
+  width: 500px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 5px 5px rgba(0, 0, 0, 0.2); }
 
 a {
   text-decoration: none;
@@ -31,16 +35,19 @@ a:hover {
   text-decoration: underline; }
 
 nav {
-  text-align: center;
-  display: inline-block;
-  position: relative;
-  margin: auto;
-  width: 300px; }
+  width: 400px;
+  margin: auto; }
+
+nav ul {
+  padding: 0; }
 
 nav li {
   list-style: none;
   background-color: #ffdf1b;
-  border-radius: 5px; }
+  border-radius: 5px;
+  text-align: center;
+  margin: 0 0 10px 0;
+  box-shadow: 3px 3px rgba(0, 0, 0, 0.2); }
 
 body {
   background-color: #0e487b;
