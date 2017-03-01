@@ -1,0 +1,9 @@
+{
+    "project": "eagle-runner",
+    "appid": "eu.goodyear.eaglerunner",
+    "description": "Eagle 360 Endless Runner",
+    "dimensions": "1920x1080",
+    "token": "djtarACtB7ctRf3AthuQoN6QZTyQA7MZ",
+    "dist": "src",
+    "packages": "packages"
+}
