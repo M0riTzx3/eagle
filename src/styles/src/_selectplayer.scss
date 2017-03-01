@@ -1,22 +1,36 @@
 
 .selectPlayer{
 
-    margin: 5% 10%;
+    margin: 1% 10%;
 }
 
+.road-selection-chooser{
 
-
-article{
     img{
-        width:320px;
-
-        
+        width:400px;
     }
 
-    .selected{
-            border:2px solid red;
+    .invalid{
+        opacity:0.5;
+    }
+}
+
+#tire-selection-chooser{
+    article{
+        img{
+            width:320px;
+
+
         }
 
-   
+        .selected{
+                border:2px solid red;
+            }
+
+
+    }
+
 }
+
+
 

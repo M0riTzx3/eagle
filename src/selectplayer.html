@@ -15,41 +15,54 @@
 
     <script type="text/javascript">
 
-     /* Smaf.ready(function() {
+      Smaf.ready(function() {
         console.log('Hello Smaf world!');
       });
-      Smaf.init('djtarACtB7ctRf3AthuQoN6QZTyQA7MZ');*/
+      Smaf.init('djtarACtB7ctRf3AthuQoN6QZTyQA7MZ');
 
       const selectAbleTires = [];
       var selectedTireDefault = 0;
       function init(){
-          $("#selectorField").focus();
           loadTires();
           hideAllTires();
           showTire(selectAbleTires[selectedTireDefault]);
-          $(document).keypress(tireSelection);
+          Smaf.on('action', tireSelection);
       }
 
       function tireSelection(event){
-        console.log(event.which);
-        if(event.which === 100){
-          hideTire(selectAbleTires[selectedTireDefault]);
-          if(selectedTireDefault+1 >=selectAbleTires.length){
-            selectedTireDefault=0;
-          }else{
-            selectedTireDefault++;
-          }
-          
-          showTire(selectAbleTires[selectedTireDefault]);
-        }else if(event.which=== 97){
-          hideTire(selectAbleTires[selectedTireDefault]);
-          if(selectedTireDefault ==0){
-            selectedTireDefault=selectAbleTires.length-1;
-          }else{
-            selectedTireDefault--;
-          }
-          
-          showTire(selectAbleTires[selectedTireDefault]);
+        if(event.type==="keyDown"){
+
+            if(event.keyCode === 13 || event.command==="ENTER"){
+                var paramsToForward = {
+                    road:"dryRoad",
+                    tire:selectAbleTires[selectedTireDefault]
+                }
+                window.location = "/game.html?"+$.param(paramsToForward);
+
+
+            }
+            
+
+            if(event.keyCode === 37 || event.command==="LEFT"){
+                hideTire(selectAbleTires[selectedTireDefault]);
+                if(selectedTireDefault ==0){
+                 selectedTireDefault=selectAbleTires.length-1;
+                }else{
+                    selectedTireDefault--;
+                }
+
+                showTire(selectAbleTires[selectedTireDefault]);
+
+            }else if(event.keyCode === 39 || event.command==="RIGHT"){
+                hideTire(selectAbleTires[selectedTireDefault]);
+                if(selectedTireDefault+1 >=selectAbleTires.length){
+                    selectedTireDefault=0;
+                }else{
+                    selectedTireDefault++;
+                }
+                showTire(selectAbleTires[selectedTireDefault]);
+            }
+
         }
 
       }
@@ -92,15 +105,20 @@
      
 
     </script>
+    <audio src="sounds/The Path of the Goblin King v2.mp3">
+        Your browser does not support the <code>audio</code> element.
+    </audio>
 
     <header></header>
 
     <main class="selectPlayer">
       
       <h2>Choose a Level</h2>
-      <div class="selection-chooser">
+      <div class="road-selection-chooser">
         <article>
-          <img src="" meta"dry_road"/>
+          <img id="dryRoad" src="images/GameLong.png" meta"dry_road"/>
+          <img id="wetRoad" class="invalid" src="images/GameLong.png" meta"dry_road"/>
+          <img id="snowRoad" class="invalid" src="images/GameLong.png" meta"dry_road"/>
           <p>This road is suited for summer tires</p>
 
         </article>
