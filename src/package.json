@@ -4,7 +4,8 @@
   "description": "Eagle 360 Endless Runner",
   "main": "js/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "./node_modules/local-web-server/bin/cli.js"
   },
   "repository": {
     "type": "git",
@@ -14,5 +15,8 @@
   "homepage": "https://bitbucket.org/emea_cf/eagle360#readme",
   "dependencies": {
     "phaser-ce": "^2.7.3"
+  },
+  "devDependencies": {
+    "local-web-server": "^1.2.6"
   }
 }
