@@ -2,21 +2,24 @@
 <html>
   <head lang="en">
     <meta charset="UTF-8">
-    <title>Eagle 360 Start screen</title>
+    <title>eagle-runner</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" type="text/css" href="styles/main.css"></link> 
-    <link rel="stylesheet" type="text/css" href="styles/startscreen.css"></link> 
+    <script type="text/javascript" src="./node_modules/phaser-ce/build/phaser.js"></script>
     <script type="text/javascript" src="js/vendor/smaf.js"></script>
   </head>
 
   <body>
 
+    <script src="js/main.js"></script>
+
     <script type="text/javascript">
 
       Smaf.ready(function() {
         console.log('Hello Smaf world!');
+        initGame();
       });
       Smaf.init('djtarACtB7ctRf3AthuQoN6QZTyQA7MZ');
 
