@@ -6,21 +6,201 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" type="text/css" href="styles/main.css"></link> 
-    <link rel="stylesheet" type="text/css" href="styles/selectplayer.css"></link> 
+    <link rel="stylesheet" type="text/css" href="styles/dist/styles.css"></link> 
     <script type="text/javascript" src="js/vendor/smaf.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
   </head>
 
   <body>
 
     <script type="text/javascript">
 
-      Smaf.ready(function() {
+     /* Smaf.ready(function() {
         console.log('Hello Smaf world!');
       });
-      Smaf.init('djtarACtB7ctRf3AthuQoN6QZTyQA7MZ');
+      Smaf.init('djtarACtB7ctRf3AthuQoN6QZTyQA7MZ');*/
+
+      const selectAbleTires = [];
+      var selectedTireDefault = 0;
+      function init(){
+          $("#selectorField").focus();
+          loadTires();
+          hideAllTires();
+          showTire(selectAbleTires[selectedTireDefault]);
+          $(document).keypress(tireSelection);
+      }
+
+      function tireSelection(event){
+        console.log(event.which);
+        if(event.which === 100){
+          hideTire(selectAbleTires[selectedTireDefault]);
+          if(selectedTireDefault+1 >=selectAbleTires.length){
+            selectedTireDefault=0;
+          }else{
+            selectedTireDefault++;
+          }
+          
+          showTire(selectAbleTires[selectedTireDefault]);
+        }else if(event.which=== 97){
+          hideTire(selectAbleTires[selectedTireDefault]);
+          if(selectedTireDefault ==0){
+            selectedTireDefault=selectAbleTires.length-1;
+          }else{
+            selectedTireDefault--;
+          }
+          
+          showTire(selectAbleTires[selectedTireDefault]);
+        }
+
+      }
+
+
+      function loadTires(){
+        var tireImageTags = $("#tire-selection-chooser article img");
+
+        for(var i=0;i<tireImageTags.length;i++){
+          console.log($(tireImageTags[i]));
+          var imageTag = $(tireImageTags[i]);
+
+          selectAbleTires.push($(imageTag).attr("id"));
+        }
+      }
+
+      function hideAllTires(){
+        for(var i=0; i<selectAbleTires.length;i++){
+          hideTire(selectAbleTires[i]);
+        }
+      }
+
+      function hideTire(tireIdToHide){
+        $("#"+tireIdToHide).removeClass("selected");
+        $("#"+tireIdToHide+"-description").hide();
+      }
+
+      function showTire(tireIdToShow){
+        $("#"+tireIdToShow).addClass("selected");
+        $("#"+tireIdToShow+"-description").show();
+      }
+
+      
+
+      $(document).ready(function(){
+        init();
+      });
+     
+
+     
 
     </script>
+
+    <header></header>
+
+    <main class="selectPlayer">
+      
+      <h2>Choose a Level</h2>
+      <div class="selection-chooser">
+        <article>
+          <img src="" meta"dry_road"/>
+          <p>This road is suited for summer tires</p>
+
+        </article>
+
+      </div>
+       
+
+
+      <h2>Choose your tire</h2>
+      <div id="tire-selection-chooser">
+        <article>
+          <p>Select one of the below tires and press "OK" on your remote control.
+          Be aware that different tires are better suited on certain levels, then others.</p>
+      
+          <img id="effigripco-tire" src="https://www.goodyear.eu/content/dam/gydu/products/EFFIGRIPCO_NORMAL.jpg.transform/product-normal/image.jpg"/>
+          <img id="ug9-tire" src="https://www.goodyear.eu/content/dam/gydu/products/UG9NCG_NORMAL.jpg.transform/product-normal/image.jpg"/>
+          <img id="vec4seasg2-tire" src="https://www.goodyear.eu/content/dam/gydu/products/VEC4SEASG2_NORMAL.jpg.transform/product-normal/image.jpg"/>
+        </article>
+
+        <div class="tire-description">
+
+          <div id="effigripco-tire-description" class="description">
+              <h4>EfficientGrip Compact</h4>
+              <p class="EfficientGrip Compact">
+                Der Spritspar-Sommerreifen mit langer Lebensdauer und gutem Handling bei Nässe und Trockenheit
+              </p>
+              <p class="benefits">
+                <ul>
+                  <li>Gute Resistenz bei Aquaplaning aufgrund großer Mittelrillen und runder Karkasskontur</li>
+                  <li>Lamellen für gutes Nasshandling</li>
+                  <li>Gutes Trockenhandling durch relativ große Schulterblöcke und gleichmäßige Bodendruckverteilung</li>
+                  <li>Niedriges Reifengewicht für geringen Rollwiderstand</li>
+                </ul>
+              </p>
+              <p class="gameAttributes">
+                <h4>In Game Attributes</h4>
+                <ul>
+                  <li>Runs faster on dry road</li>
+                  <li>Average on rainy road</li>
+                  <li>Slower on snow road</li>
+
+                </ul>
+              </p>
+
+            </div>
+
+            <div id="ug9-tire-description" class="description">
+              <h4>UltraGrip 9</h4>
+              <p class="EfficientGrip Compact">
+                Herausragende Leistung bei rauesten Winterbedingungen
+              </p>
+              <p class="benefits">
+                <ul>
+                  <li>Kurzer Bremsweg auf Schnee</li>
+                  <li>Hydrodynamische Rillen zur aktiven Vermeidung von Aquaplaning</li>
+                  <li>Optimierter Laufflächenverschleißindikator</li>
+                </ul>
+              </p>
+              <p class="gameAttributes">
+                <h4>In Game Attributes</h4>
+                <ul>
+                  <li>Runs faster on snow road</li>
+                  <li>Average on rainy road</li>
+                  <li>Slower on dry roads</li>
+
+                </ul>
+              </p>
+
+            </div>
+
+           <div id="vec4seasg2-tire-description" class="description">
+              <h4>Vector 4Seasons Gen-2</h4>
+              <p class="EfficientGrip Compact">
+                Für sorgenfreies Fahren bei allen Wetterbedingungen
+              </p>
+              <p class="benefits">
+                <ul>
+                  <li>Gute Fahreigenschaften im Sommer und im Winter</li>
+                  <li>Gute Bodenhaftung bei jeder Temperatur</li>
+                  <li>Umweltfreundlich dank geringem Rollwiderstand</li>
+                </ul>
+              </p>
+              <p class="gameAttributes">
+                <h4>In Game Attributes</h4>
+                <ul>
+                  <li>Average on snow road</li>
+                  <li>Average on rainy road</li>
+                  <li>Average on dry roads</li>
+
+                </ul>
+              </p>
+
+            </div>
+        </div>
+
+      </div>
+
+    </main>
+
+    <footer></footer>
 
   </body>
 </html>
