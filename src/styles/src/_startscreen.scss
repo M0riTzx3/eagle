@@ -29,17 +29,15 @@ a:hover {
 }
 
 nav {
-  text-align: center;
-  display: inline-block;
-  position: relative;
-  width: 100%;
-  margin: auto;
+  width: 300px;
+
 }
 
 nav li {
   list-style: none;
   background-color: #ffdf1b;
   border-radius: 5px;
+  text-align: center;
 }
 
 body {
