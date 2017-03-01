@@ -1,3 +1,6 @@
+import Wingfoot from "./wingfoot"
+import Score from "./score"
+
 const WIDTH = 960
 const HEIGHT = 540
 let gamespeed = 300
@@ -11,12 +14,8 @@ function initGame() {
   let ground
   let player
   let cursors
-  let obstacle
-  let score = 0
-  let scoreText
 
   function preload () {
-    game.load.image('logo', 'images/gy-logo.png')
     game.load.image('road', 'images/road-seamless.jpg')
     game.load.image('player', 'images/goodyear-tire-concept_128.png')
     game.load.image('wingfoot', 'images/wingfoot_128.png')
@@ -33,45 +32,35 @@ function initGame() {
     // Add player
     player = game.add.sprite(100, game.height/2, 'player')
     game.physics.p2.enable(player)
-
     player.body.onBeginContact.add(collisionHandler, this)
 
-    scoreText = game.add.text(WIDTH-64, 32, score, { font: "20px Arial", fill: "#ffffff", align: "left" })
+    // Add score
+    Score.init(game, WIDTH-64, 32)
 
-    // Create timer to spawn obstacles
-    game.time.events.repeat(Phaser.Timer.SECOND * 5, 10, createObstacle, this)
+    // Create timer to spawn wingfoots
+    game.time.events.repeat(Phaser.Timer.SECOND * 2, 10, createWingfoot, this)
   }
 
   function collisionHandler(body, bodyB, shapeA, shapeB, equation) {
-    let result = ""
     if (body) {
-      result = 'You last hit: ' + body.sprite.key
-      score += 100
-      body.sprite.destroy()
+      if (body.sprite.key === "wingfoot") {
+        Wingfoot.onCollision(body.sprite, Score)
+      }
+    } else {
+      // hit the wall :)
     }
-    else {
-      result = 'You last hit: The wall :)'
-    }
-    console.log(result)
   }
 
-  function createObstacle() {
-    obstacle = game.add.sprite(WIDTH, game.world.randomY, 'wingfoot')
-
-    game.physics.p2.enable(obstacle)
-
-    obstacle.body.velocity.x = -Math.abs(gamespeed)
-    obstacle.body.collideWorldBounds = true
-
+  function createWingfoot() {
+    Wingfoot.create(game, gamespeed)
   }
 
   function update() {
     gamespeed = document.getElementById("gamespeed").value
     ground.autoScroll(-Math.abs(gamespeed), 0)
-
     player.body.rotateRight(gamespeed / 4)
     player.body.setZeroVelocity()
-    scoreText.text = score
+    Score.update()
     if (cursors.up.isDown) {
       player.body.moveUp(400)
     } else if (cursors.down.isDown) {
