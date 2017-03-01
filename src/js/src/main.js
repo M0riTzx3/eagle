@@ -10,3 +10,9 @@ function initGame() {
     logo.anchor.setTo(0.5, 0.5);
   }
 }
+
+Smaf.ready(() => {
+  console.log('Hello Smaf world!');
+  initGame();
+});
+Smaf.init('djtarACtB7ctRf3AthuQoN6QZTyQA7MZ');
