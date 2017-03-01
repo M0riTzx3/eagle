@@ -15,7 +15,7 @@ function initGame() {
   function preload () {
     game.load.image('logo', 'images/gy-logo.png')
     game.load.image('road', 'images/road-seamless.jpg')
-    game.load.image('player', 'images/eagle360Player.png')
+    game.load.image('player', 'images/goodyear-tire-concept_128.png')
   }
 
   function create () {
@@ -29,15 +29,13 @@ function initGame() {
     // Add player
     player = game.add.sprite(100, game.height/2, 'player')
     game.physics.p2.enable(player)
-    //  Modify a few body properties
-    player.body.setZeroDamping();
-    player.body.fixedRotation = true;
   }
 
   function update() {
     gamespeed = document.getElementById("gamespeed").value
     ground.autoScroll(-Math.abs(gamespeed), 0)
 
+    player.body.rotateRight(gamespeed / 4)
     player.body.setZeroVelocity()
     if (cursors.up.isDown) {
       player.body.moveUp(400);
