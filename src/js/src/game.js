@@ -11,11 +11,13 @@ function initGame() {
   let ground
   let player
   let cursors
+  let obstacle
 
   function preload () {
     game.load.image('logo', 'images/gy-logo.png')
     game.load.image('road', 'images/road-seamless.jpg')
     game.load.image('player', 'images/goodyear-tire-concept_128.png')
+    game.load.image('wingfoot', 'images/wingfoot_128.png')
   }
 
   function create () {
@@ -29,6 +31,33 @@ function initGame() {
     // Add player
     player = game.add.sprite(100, game.height/2, 'player')
     game.physics.p2.enable(player)
+
+    player.body.onBeginContact.add(collisionHandler, this)
+
+    // Create timer to spawn obstacles
+    game.time.events.repeat(Phaser.Timer.SECOND * 5, 10, createObstacle, this)
+  }
+
+  function collisionHandler(body, bodyB, shapeA, shapeB, equation) {
+    let result = ""
+    if (body) {
+      result = 'You last hit: ' + body.sprite.key
+      body.sprite.destroy()
+    }
+    else {
+      result = 'You last hit: The wall :)'
+    }
+    console.log(result);
+  }
+
+  function createObstacle() {
+    obstacle = game.add.sprite(WIDTH, game.world.randomY, 'wingfoot');
+
+    game.physics.p2.enable(obstacle);
+
+    obstacle.body.velocity.x = -Math.abs(gamespeed);
+    obstacle.body.collideWorldBounds = true;
+
   }
 
   function update() {
