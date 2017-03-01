@@ -12,6 +12,8 @@ function initGame() {
   let player
   let cursors
   let obstacle
+  let score = 0
+  let scoreText
 
   function preload () {
     game.load.image('logo', 'images/gy-logo.png')
@@ -34,6 +36,8 @@ function initGame() {
 
     player.body.onBeginContact.add(collisionHandler, this)
 
+    scoreText = game.add.text(WIDTH-64, 32, score, { font: "20px Arial", fill: "#ffffff", align: "left" })
+
     // Create timer to spawn obstacles
     game.time.events.repeat(Phaser.Timer.SECOND * 5, 10, createObstacle, this)
   }
@@ -42,21 +46,22 @@ function initGame() {
     let result = ""
     if (body) {
       result = 'You last hit: ' + body.sprite.key
+      score += 100
       body.sprite.destroy()
     }
     else {
       result = 'You last hit: The wall :)'
     }
-    console.log(result);
+    console.log(result)
   }
 
   function createObstacle() {
-    obstacle = game.add.sprite(WIDTH, game.world.randomY, 'wingfoot');
+    obstacle = game.add.sprite(WIDTH, game.world.randomY, 'wingfoot')
 
-    game.physics.p2.enable(obstacle);
+    game.physics.p2.enable(obstacle)
 
-    obstacle.body.velocity.x = -Math.abs(gamespeed);
-    obstacle.body.collideWorldBounds = true;
+    obstacle.body.velocity.x = -Math.abs(gamespeed)
+    obstacle.body.collideWorldBounds = true
 
   }
 
@@ -66,10 +71,11 @@ function initGame() {
 
     player.body.rotateRight(gamespeed / 4)
     player.body.setZeroVelocity()
+    scoreText.text = score
     if (cursors.up.isDown) {
-      player.body.moveUp(400);
+      player.body.moveUp(400)
     } else if (cursors.down.isDown) {
-      player.body.moveDown(400);
+      player.body.moveDown(400)
     }
   }
 }
