@@ -1,5 +1,6 @@
 const WIDTH = 960
 const HEIGHT = 540
+let gamespeed = 300
 
 function initGame() {
   const game = new Phaser.Game(WIDTH, HEIGHT, Phaser.AUTO, '', { 
@@ -9,7 +10,7 @@ function initGame() {
   })
   let ground
   let player
-  let keyboard
+  let cursors
 
   function preload () {
     game.load.image('logo', 'images/gy-logo.png')
@@ -18,31 +19,31 @@ function initGame() {
   }
 
   function create () {
-    const logo = game.add.sprite(game.world.centerX, game.world.centerY, 'logo')
-    logo.anchor.setTo(0.5, 0.5)
-    game.physics.startSystem(Phaser.Physics.P2)
-
+    game.world.setBounds(0, 0, WIDTH, HEIGHT)
+    game.physics.startSystem(Phaser.Physics.P2JS)
     // Adds ground texture & start scrolling
     ground = game.add.tileSprite(0, 0, WIDTH, HEIGHT, 'road')
-    ground.autoScroll(-300, 0)
+    ground.autoScroll(-Math.abs(gamespeed), 0)
     // Enable cursor keys
-    keyboard = game.input.keyboard.createCursorKeys();
+    cursors = game.input.keyboard.createCursorKeys()
     // Add player
-    player = game.add.sprite(100, game.height/2, 'player');
-    player.anchor.set(0.5);
-    // Add player constraints
-    game.physics.enable(player, Phaser.Physics.ARCADE);
-    player.body.immovable = true;
-    player.checkWorldBounds = true;
-    player.body.collideWorldBounds = true;
+    player = game.add.sprite(100, game.height/2, 'player')
+    game.physics.p2.enable(player)
+    //  Modify a few body properties
+    player.body.setZeroDamping();
+    player.body.fixedRotation = true;
   }
 
   function update() {
-    if (keyboard.up.isDown) {
-      game.add.tween(player).to({y: '-64'}, 150, Phaser.Easing.Linear.None, true);
-    } else if (keyboard.down.isDown) {
-      game.add.tween(player).to({y: '+64'}, 150, Phaser.Easing.Linear.None, true);
-    } 
+    gamespeed = document.getElementById("gamespeed").value
+    ground.autoScroll(-Math.abs(gamespeed), 0)
+
+    player.body.setZeroVelocity()
+    if (cursors.up.isDown) {
+      player.body.moveUp(400);
+    } else if (cursors.down.isDown) {
+      player.body.moveDown(400);
+    }
   }
 }
 
