@@ -67,6 +67,12 @@ function initGame() {
             player.body.moveDown(400)
         }
     }
-}
+  }
+
+Smaf.on('action', function(keypress) {
+  if(keypress.keyCode === 8 || keypress.type === 'BACK') {
+    window.location.href = "/";
+  }
+});
 
 export default initGame
