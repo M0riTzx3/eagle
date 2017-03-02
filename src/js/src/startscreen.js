@@ -1,8 +1,10 @@
 import trackEvent from "./googleAnalytics"
 import smafLoader from "./smafLoader"
 
-var selectedItem;
+var selectedItem = 'startgame';
 var score = 0;
+var storageScore;
+var highscore = 0;
 
 function init() {
     smafLoader();
@@ -24,9 +26,28 @@ function setScore(searchscore) {
 				category: "game-end",
 				action: "Game ended with a score of " + score + " points."
         });
+        //handleStorageScore();
         $("#score").removeClass("invisible");
-        $("#score").html("<h1>You earned " + score + " Points!</h1>");
+        $("#score").html("<h1>You earned " + score + " Points!</h1></br><h1>Highscore: " + highscore);
     }
+}
+
+function handleStorageScore() {
+    storageScore = Smaf.storage().getItem("highscore");
+    if(storageScore !== undefined) {
+        if(storageScore < score) {
+            storeScore();
+        } else {
+            highscore = storageScore;
+        }
+    } else {
+        storeScore();
+    }
+}
+
+function storeScore() {
+    Smaf.storage().setItem("highscore", score);
+    highscore = score;
 }
 
 function menuControls(selection) {
@@ -47,7 +68,7 @@ function menuControls(selection) {
                 Smaf.storage().setItem("highscore", this.score);
             }
         }
-    }
+    } 
 }
 
 function getQueryParams(qs) {
