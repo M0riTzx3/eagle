@@ -1,3 +1,4 @@
+import $ from "jquery"
 import trackEvent from "./googleAnalytics"
 import smafLoader from "./smafLoader"
 

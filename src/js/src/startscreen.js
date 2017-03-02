@@ -1,5 +1,6 @@
 import trackEvent from "./googleAnalytics"
 import smafLoader from "./smafLoader"
+import $ from "jquery"
 
 var selectedItem;
 var score = 0;
