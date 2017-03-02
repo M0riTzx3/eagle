@@ -31,7 +31,7 @@ function tireSelection(event){
         }
 
         if(event.command==="BACK"){
-            window.location ="/";
+            window.location ="/index.html";
         }
 
 
