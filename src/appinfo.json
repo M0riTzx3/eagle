@@ -1,9 +1,9 @@
 {
     "id": "com.yourdomain.app",
     "version": "0.0.1",
-    "vendor": "My Company",
+    "vendor": "Goodyears",
     "type": "web",
     "main": "index.html",
-    "title": "singlepane",
+    "title": "Eagle360 Runner",
     "icon": "icon.png"
 }
