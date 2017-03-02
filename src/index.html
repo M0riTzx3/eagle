@@ -9,26 +9,21 @@
     <link rel="stylesheet" type="text/css" href="styles/dist/styles.css"></link>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/vendor/smaf.js"></script>
+    <script type="text/javascript" src="js/dist/startScreen-bundle.js"></script>
   </head>
 
   <body>
-    <audio src="sounds/Monkeys Spinning Monkeys.mp3">
+    <audio src="sounds/Monkeys Spinning Monkeys.mp3" >
     </audio>
-    <script type="text/javascript">
-
-      Smaf.ready(function() {
-        console.log('Hello Smaf world!');
-      });
-      Smaf.init('djtarACtB7ctRf3AthuQoN6QZTyQA7MZ');
-    </script>
-
 
     <header class="startscreen">
+      <section id="score" class="invisible">
+      </section>
       <h1>Eagle 360</h1>
       <h2>Endless Runner</h2>
       <nav>
         <ul>
-          <li>
+          <li class="selected">
             <a href="selectplayer.html">Start</a>
           </li>
           <li>

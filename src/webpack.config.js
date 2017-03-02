@@ -4,7 +4,8 @@ module.exports = {
   //entry: './js/src/main.js',
   entry:{
 	  game: './js/src/main.js',
-	  playerSelect: './js/src/playerSelectionScreen.js'
+	  playerSelect: './js/src/playerSelectionScreen.js',
+	  startScreen: './js/src/startscreen.js'
   },
   output: {
     filename: '[name]-bundle.js',
