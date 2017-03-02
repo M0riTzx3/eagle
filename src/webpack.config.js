@@ -1,9 +1,13 @@
 var path = require('path');
 
 module.exports = {
-  entry: './js/src/main.js',
+  //entry: './js/src/main.js',
+  entry:{
+	  game: './js/src/main.js',
+	  playerSelect: './js/src/playerSelectionScreen.js'
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name]-bundle.js',
     path: path.resolve(__dirname, './js/dist')
   },
   module: {
