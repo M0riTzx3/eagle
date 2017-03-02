@@ -6,9 +6,12 @@ export default {
         text = game.add.text(x, y, value, { font: "20px Arial", fill: "#ffffff", align: "left" })
     },
     update() {
-        text.text = value
+        text.text = "Score: "+value
     },
     add(amount) {
         value += amount
+    },
+    currentScore(){
+        return value
     }
 }
