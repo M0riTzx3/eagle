@@ -7,7 +7,9 @@ function init(){
   loadTires();
   hideAllTires();
   showTire(selectAbleTires[selectedTireDefault]);
-  Smaf.on('action', tireSelection);
+  Smaf.ready(() => {
+  	Smaf.on('action', tireSelection);
+  });
 }
 
 function tireSelection(event){
