@@ -23,6 +23,8 @@ export default {
     },
     onCollision(wingfoot, score) {
         score.add(100)
-        wingfoot.sprite.destroy()
+        if(wingfoot.sprite!=null){
+            wingfoot.sprite.destroy()
+        }
     }
 }
