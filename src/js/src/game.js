@@ -12,12 +12,15 @@ function initGame() {
         update: update
     })
     let ground
-    let player
+    let player 
+    let wingfootDestroyer
+    let wingfootDestroyerCollisionGroup
     let cursors
     let playerCollisionGroup
     let timer;
     const gameTimeLimit = 60;
     const increaseGameSpeed = 200;
+    const WINGFOOT_DESTROYER_WIDTH=20;
     var timeoutEvent
 
     function preload () {
@@ -32,6 +35,7 @@ function initGame() {
         game.physics.p2.setImpactEvents(true)
         playerCollisionGroup = game.physics.p2.createCollisionGroup()
         const wingfootCollisionGroup = game.physics.p2.createCollisionGroup()
+        wingfootDestroyerCollisionGroup = game.physics.p2.createCollisionGroup()
         game.physics.p2.updateBoundsCollisionGroup()
         // Adds ground texture & start scrolling
         ground = game.add.tileSprite(0, 0, WIDTH, HEIGHT, 'road')
@@ -41,6 +45,17 @@ function initGame() {
         // Add player
         player = game.add.sprite(100, game.height/2, 'player')
         game.physics.p2.enable(player)
+
+        // Add Wingfoot destroy element
+
+        var bmd = game.make.bitmapData(WINGFOOT_DESTROYER_WIDTH, HEIGHT);
+
+        //  Draw a few random shapes to it
+        bmd.rect(0, 0, WINGFOOT_DESTROYER_WIDTH, HEIGHT, 'rgba(255,0,255,0)');
+
+        //  Here the sprite uses the BitmapData as a texture
+        wingfootDestroyer = game.add.sprite(0, 0, bmd);
+        game.physics.p2.enable(wingfootDestroyer)
 
         // Add score
         Score.init(game, WIDTH-128, 32)
@@ -54,7 +69,12 @@ function initGame() {
 
         game.time.events.loop(Phaser.Timer.SECOND * 2, createWingfoot, this);
         game.time.events.loop(Phaser.Timer.SECOND * 10, increaseSpeed, this)
-        
+
+        // wingfootDestroyer 
+        // set new Collision Group on Wingfoot destroyer
+        // wingfootDestroyer.body.collides(wingfootCollisionGroup, destroyWingfoot, this)
+        wingfootDestroyer.body.setCollisionGroup(wingfootDestroyerCollisionGroup)
+        wingfootDestroyer.body.collides(wingfootCollisionGroup, onWingfootDestroyCollision,this)
         player.body.setCollisionGroup(playerCollisionGroup)
         player.body.collides(wingfootCollisionGroup, onWingfootCollision, this)
     }
@@ -82,8 +102,12 @@ function initGame() {
         Wingfoots.onCollision(wingfoot, Score)
     }
 
+    function onWingfootDestroyCollision(wingfootDestroyer, wingfoot){
+        Wingfoots.onDestroyCollision(wingfoot);
+    }
+
     function createWingfoot() {
-        Wingfoots.create(gamespeed, playerCollisionGroup)
+        Wingfoots.create(gamespeed, playerCollisionGroup,wingfootDestroyerCollisionGroup)
     }
 
     function update() {
@@ -92,6 +116,7 @@ function initGame() {
         ground.autoScroll(-Math.abs(gamespeed), 0)
         player.body.rotateRight(gamespeed / 4)
         player.body.setZeroVelocity()
+        wingfootDestroyer.body.setZeroVelocity()
         //Update Score
         Score.update()
         //Update Timer
