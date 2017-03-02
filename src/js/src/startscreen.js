@@ -6,14 +6,8 @@ var selectedItem;
     function init() {
     smafLoader();
     checkQuerys();
-    Smaf.ready(() => {
-        
-    });
+        Smaf.on('action', menuControls);    
     }
-
-    Smaf.init('djtarACtB7ctRf3AthuQoN6QZTyQA7MZ');      
-
-    Smaf.on('action', menuControls);    
 
     function checkQuerys() {
     var search = document.location.search;
