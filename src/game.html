@@ -3,9 +3,11 @@
   <head lang="en">
     <meta charset="UTF-8">
     <title>eagle-runner</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="./node_modules/phaser-ce/build/phaser.js"></script>
     <script type="text/javascript" src="js/vendor/smaf.js"></script>
-    <script type="text/javascript" src="js/vendor/phaser.min.js"></script>
     <style>
       canvas {
         margin: 0 auto;
@@ -14,10 +16,11 @@
   </head>
 
   <body>
-    <audio src="sounds/The Mexican Hat Dance.mp3" autoplay>
+
+    <script src="js/dist/game-bundle.js"></script>
+	<audio src="/sounds/The_Mexican_Hat_Dance.mp3" autoplay>
         Your browser does not support the <code>audio</code> element.
     </audio>
-    <script src="js/dist/game-bundle.js"></script>
 
     <div>
       <input type="range" min="100" max="5000" value="300" id="gamespeed">
