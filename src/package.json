@@ -18,6 +18,7 @@
   "author": "Goodyear",
   "homepage": "https://bitbucket.org/emea_cf/eagle360#readme",
   "dependencies": {
+    "jquery": "^3.1.1",
     "phaser-ce": "^2.7.3"
   },
   "devDependencies": {
