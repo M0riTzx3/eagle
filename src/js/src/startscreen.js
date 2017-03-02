@@ -4,13 +4,17 @@ import $ from "jquery"
 
 var selectedItem = 'startgame';
 var score = 0;
-var storageScore;
+var storageScore = 0;
 var highscore = 0;
 
 function init() {
     smafLoader();
-    checkQuerys();
-    Smaf.on('action', menuControls);
+    Smaf.ready(() => {
+        checkQuerys();
+        Smaf.on('action', menuControls);
+    });
+    
+    
 }
 
 function checkQuerys() {
@@ -27,23 +31,23 @@ function setScore(searchscore) {
             category: "game-end",
             action: "Game ended with a score of " + score + " points."
         });
-        //handleStorageScore();
+        handleStorageScore();
         $("#score").removeClass("invisible");
-        $("#score").html("<h1>You earned " + score + " Points!</h1></br><h1>Highscore: " + highscore);
     }
 }
 
 function handleStorageScore() {
-    storageScore = Smaf.storage().getItem("highscore");
-    if(storageScore !== undefined) {
-        if(storageScore < score) {
-            storeScore();
+    Smaf.storage().getItem('highscore', function(err, value) {
+        storageScore = parseInt(value);
+        console.log(storageScore);
+        if(score > storageScore) {
+            storeScore();  
         } else {
             highscore = storageScore;
-        }
-    } else {
-        storeScore();
-    }
+        }    
+        $("#score").html("<h1>You earned " + score + " Points!</h1></br><h1>Highscore: " + highscore);
+       
+    });
 }
 
 function storeScore() {
