@@ -1,4 +1,4 @@
-import Wingfoot from "./wingfoot"
+import Wingfoots from "./wingfoot"
 import Score from "./score"
 
 const WIDTH = 960
@@ -14,6 +14,7 @@ function initGame() {
     let ground
     let player
     let cursors
+    let playerCollisionGroup
 
     function preload () {
         game.load.image('road', 'images/road-seamless.jpg')
@@ -24,6 +25,10 @@ function initGame() {
     function create () {
         game.world.setBounds(0, 0, WIDTH, HEIGHT)
         game.physics.startSystem(Phaser.Physics.P2JS)
+        game.physics.p2.setImpactEvents(true)
+        playerCollisionGroup = game.physics.p2.createCollisionGroup()
+        const wingfootCollisionGroup = game.physics.p2.createCollisionGroup()
+        game.physics.p2.updateBoundsCollisionGroup()
         // Adds ground texture & start scrolling
         ground = game.add.tileSprite(0, 0, WIDTH, HEIGHT, 'road')
         ground.autoScroll(-Math.abs(gamespeed), 0)
@@ -32,27 +37,23 @@ function initGame() {
         // Add player
         player = game.add.sprite(100, game.height/2, 'player')
         game.physics.p2.enable(player)
-        player.body.onBeginContact.add(collisionHandler, this)
 
         // Add score
         Score.init(game, WIDTH-64, 32)
 
+        Wingfoots.init(game, Phaser, wingfootCollisionGroup)
         // Create timer to spawn wingfoots
         game.time.events.repeat(Phaser.Timer.SECOND * 2, 100, createWingfoot, this)
+        player.body.setCollisionGroup(playerCollisionGroup)
+        player.body.collides(wingfootCollisionGroup, onWingfootCollision, this)
     }
 
-    function collisionHandler(body, bodyB, shapeA, shapeB, equation) {
-        if (body) {
-            if (body.sprite.key === "wingfoot") {
-                Wingfoot.onCollision(body.sprite, Score)
-            }
-        } else {
-            // hit the wall :)
-        }
+    function onWingfootCollision(player, wingfoot) {
+        Wingfoots.onCollision(wingfoot, Score)
     }
 
     function createWingfoot() {
-        Wingfoot.create(game, gamespeed)
+        Wingfoots.create(gamespeed, playerCollisionGroup)
     }
 
     function update() {
@@ -67,12 +68,12 @@ function initGame() {
             player.body.moveDown(400)
         }
     }
-  }
+}
 
 Smaf.on('action', function(keypress) {
-  if(keypress.keyCode === 8 || keypress.type === 'BACK') {
-    window.location.href = "/";
-  }
+    if(keypress.keyCode === 8 || keypress.type === 'BACK') {
+        window.location.href = "/";
+    }
 });
 
 export default initGame
