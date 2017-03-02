@@ -67,7 +67,6 @@ function initGame() {
             player.body.moveDown(400)
         }
     }
-<<<<<<< HEAD
   }
 
 Smaf.on('action', function(keypress) {
@@ -75,9 +74,5 @@ Smaf.on('action', function(keypress) {
     window.location.href = "/";
   }
 });
-
-=======
->>>>>>> be29373c6ad37cdb349cf87e06d32a1c67137990
-}
 
 export default initGame
