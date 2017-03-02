@@ -30,6 +30,10 @@ function tireSelection(event){
 
         }
 
+        if(event.command==="BACK"){
+            window.location ="/";
+        }
+
 
         if(event.command==="LEFT"){
             hideTire(selectAbleTires[selectedTireDefault]);
