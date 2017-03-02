@@ -3,7 +3,7 @@ import game from "./game"
 
 
 Smaf.ready(() => {
-  game();
+    game();
 });
 
 smafLoader();

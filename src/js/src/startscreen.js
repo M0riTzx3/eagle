@@ -7,7 +7,7 @@ var score = 0;
 function init() {
     smafLoader();
     checkQuerys();
-    Smaf.on('action', menuControls);    
+    Smaf.on('action', menuControls);
 }
 
 function checkQuerys() {
@@ -21,8 +21,8 @@ function setScore(searchscore) {
     if(searchscore !== undefined) {
         score = searchscore;
         trackEvent({
-				category: "game-end",
-				action: "Game ended with a score of " + score + " points."
+            category: "game-end",
+            action: "Game ended with a score of " + score + " points."
         });
         $("#score").removeClass("invisible");
         $("#score").html("<h1>You earned " + score + " Points!</h1>");
