@@ -13,13 +13,15 @@ function initGame() {
     })
     let ground
     let player 
+    let wingfootSpawnEvent
     let wingfootDestroyer
     let wingfootDestroyerCollisionGroup
     let cursors
     let playerCollisionGroup
+    let timerText;
     let timer;
-    const gameTimeLimit = 60;
-    const increaseGameSpeed = 200;
+    const gameTimeLimit = 60000;
+    const increaseGameSpeed = 300;
     const WINGFOOT_DESTROYER_WIDTH=20;
     var timeoutEvent
 
@@ -61,14 +63,22 @@ function initGame() {
         Score.init(game, WIDTH-128, 32)
 
         // Add Game End Timer
-        timer = game.add.text(WIDTH/2-100, 32, "Remaining Time: ", { font: "20px Arial", fill: "#ffffff", align: "left" })
+        timer = game.time.create(false);
+        timerText = game.add.text(WIDTH/2-100, 32, "Remaining Time: ", { font: "20px Arial", fill: "#ffffff", align: "left" })
+        timer.add(gameTimeLimit, gameEnd, this);
 
-        Wingfoots.init(game, Phaser, wingfootCollisionGroup)
+
+        wingfootSpawnEvent = game.time.create(false);
+        wingfootSpawnEvent.loop(Phaser.Timer.SECOND * 2, createWingfoot, this);
+
+        //game.time.events.loop(Phaser.Timer.SECOND * 0.5, createWingfoot, this);
+        
+        Wingfoots.init(game, Phaser, wingfootCollisionGroup,wingfootSpawnEvent)
         // Create timer to spawn wingfoots
         // Until Game Ends
-
-        game.time.events.loop(Phaser.Timer.SECOND * 2, createWingfoot, this);
+       
         game.time.events.loop(Phaser.Timer.SECOND * 10, increaseSpeed, this)
+        game.time.events.repeat(Phaser.Timer.SECOND * 20, 2, Wingfoots.increaseSpawnSpeed,this)
 
         // wingfootDestroyer 
         // set new Collision Group on Wingfoot destroyer
@@ -77,6 +87,10 @@ function initGame() {
         wingfootDestroyer.body.collides(wingfootCollisionGroup, onWingfootDestroyCollision,this)
         player.body.setCollisionGroup(playerCollisionGroup)
         player.body.collides(wingfootCollisionGroup, onWingfootCollision, this)
+
+        //Start all loops
+        wingfootSpawnEvent.start()
+        timer.start()
     }
 
     function gameEnd(){
@@ -96,6 +110,7 @@ function initGame() {
 
     function increaseSpeed(){
         gamespeed += increaseGameSpeed;
+        
     }
 
     function onWingfootCollision(player, wingfoot) {
@@ -112,7 +127,9 @@ function initGame() {
 
     function update() {
         var elapsedTime = parseInt(this.game.time.totalElapsedSeconds())
-        updateTimer(elapsedTime)        
+             
+        updateTimer()
+
         ground.autoScroll(-Math.abs(gamespeed), 0)
         player.body.rotateRight(gamespeed / 4)
         player.body.setZeroVelocity()
@@ -127,16 +144,12 @@ function initGame() {
             player.body.moveDown(400)
         }
         
-        if(elapsedTime > gameTimeLimit){
-            gameEnd()
-        }
     }
 
 
-    function updateTimer(elapsedTime){
-        if(gameTimeLimit-elapsedTime >= 0 ){
-            timer.text = "Remaining Time: "+(gameTimeLimit-elapsedTime)
-        }
+    function updateTimer(){
+        var timeLeft = parseInt(timer.duration.toFixed(0) /1000)
+        timerText.text = "Remaining Time: "+timeLeft
     }
 
 }
