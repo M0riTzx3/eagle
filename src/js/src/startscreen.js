@@ -38,15 +38,18 @@ function setScore(searchscore) {
 
 function handleStorageScore() {
     Smaf.storage().getItem('highscore', function(err, value) {
-        storageScore = parseInt(value);
-        console.log(storageScore);
-        if(score > storageScore) {
-            storeScore();  
-        } else {
-            highscore = storageScore;
-        }    
-        $("#score").html("<h1>You earned " + score + " Points!</h1></br><h1>Highscore: " + highscore);
-       
+        if(value==null){
+            storeScore();
+        }else{
+            storageScore = parseInt(value);
+            console.log(storageScore);
+            if(score > storageScore) {
+                storeScore();  
+            } else {
+                highscore = storageScore;
+            }    
+        }
+         $("#score").html("<h1>You earned " + score + " Points!</h1></br><h1>Highscore: " + highscore);
     });
 }
 
