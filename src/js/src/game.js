@@ -100,12 +100,30 @@ function initGame() {
         var text = game.add.text(WIDTH/2-100, HEIGHT/2 - 100, "GAME END", { font: "32px Arial", fill: "#ffffff", align: "left",alpha:1 })
         var thanksText = game.add.text(WIDTH/2-175, HEIGHT/2, "Thank you for playing !", { font: "32px Arial", fill: "#ffffff", align: "left",alpha:1 })
 
-        game.paused = true;
-
+        game.paused = true
+        manageHighscore()
         setTimeout(function(){
             window.location="/index.html?score="+Score.currentScore()
         },3000)
 
+    }
+
+    function manageHighscore(){
+        var score = Score.currentScore()
+        Smaf.storage().getItem('highscore', function(err, value) {
+            if(value==null){
+                storeScore();
+            }else{
+                var storageScore = parseInt(value);
+                if(score > storageScore) {
+                    storeScore();  
+                }   
+            }
+        });
+    }
+
+    function storeScore() {
+        Smaf.storage().setItem("highscore", Score.currentScore());
     }
 
     function increaseSpeed(){
