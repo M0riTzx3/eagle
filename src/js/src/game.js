@@ -33,12 +33,23 @@ function initGame() {
 
     function create () {
         game.world.setBounds(0, 0, WIDTH, HEIGHT)
+        game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
+ 
+        //have the game centered horizontally
+
+        game.scale.pageAlignHorizontally = true;
+
+        game.scale.pageAlignVertically = true;
+
+        //screen size will be set automatically
+
         game.physics.startSystem(Phaser.Physics.P2JS)
         game.physics.p2.setImpactEvents(true)
         playerCollisionGroup = game.physics.p2.createCollisionGroup()
         const wingfootCollisionGroup = game.physics.p2.createCollisionGroup()
         wingfootDestroyerCollisionGroup = game.physics.p2.createCollisionGroup()
         game.physics.p2.updateBoundsCollisionGroup()
+        
         // Adds ground texture & start scrolling
         ground = game.add.tileSprite(0, 0, WIDTH, HEIGHT, 'road')
         ground.autoScroll(-Math.abs(gamespeed), 0)
