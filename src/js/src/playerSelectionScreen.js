@@ -62,8 +62,20 @@ function tireSelection(event){
 
 function initTouch() {
   $("#tire-selection-chooser img").click(function() {
-    hideTire($(".selected").attr('id'))
-    showTire($(this).attr('id'))
+    if($(this).attr('class') === "selected") {
+      var paramsToForward = {
+          road:"dryRoad",
+          tire:selectAbleTires[selectedTireDefault]
+      }
+      trackEvent({
+          category: "game-start",
+          action: "Game starts with road: "+paramsToForward.road+" and tire: "+paramsToForward.tire
+      });
+      window.location = "/game.html?"+$.param(paramsToForward);
+    } else {
+      hideTire($(".selected").attr('id'))
+      showTire($(this).attr('id'))
+    }
   });
 }
 
