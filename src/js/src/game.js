@@ -79,11 +79,11 @@ function initGame() {
 
         // Init all events
         
-        wingfootSpawnEvent.loop(Phaser.Timer.SECOND * 2, createWingfoot, this);
-        nailBoardSpawnEvent.loop(Phaser.Timer.SECOND * 5, createNailboard, this)
-        game.time.events.repeat(Phaser.Timer.SECOND * 10, 20, increaseSpeed, this)
-        game.time.events.repeat(Phaser.Timer.SECOND * 15, 5, Wingfoots.increaseSpawnSpeed,this)
-        game.time.events.repeat(Phaser.Timer.SECOND * 20, 5, Nailboards.increaseSpawnSpeed,this)
+        wingfootSpawnEvent.loop(Phaser.Timer.SECOND * 3, createWingfoot, this);
+        nailBoardSpawnEvent.loop(Phaser.Timer.SECOND * 2.5, createNailboard, this)
+        game.time.events.repeat(Phaser.Timer.SECOND * 10, 10, increaseSpeed, this)
+        game.time.events.repeat(Phaser.Timer.SECOND * 8, 6, Wingfoots.increaseSpawnSpeed,this)
+        game.time.events.repeat(Phaser.Timer.SECOND * 10, 6, Nailboards.increaseSpawnSpeed,this)
 
 
         //Start all loops
