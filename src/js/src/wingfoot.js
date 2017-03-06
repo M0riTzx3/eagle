@@ -18,7 +18,7 @@ export default {
     create(gamespeed, playerCollisionGroup,wingfootDestroyerCollisionGroup) {
         spawnDelay = spawnEvent.events[0].delay
         const wingfoot = wingfoots.create(game.width, game.world.randomY, 'wingfoot')
-        wingfoot.body.velocity.mx=gamespeed+200
+        wingfoot.body.velocity.mx=gamespeed+300
         //  Tell the panda to use the pandaCollisionGroup
         wingfoot.body.setCollisionGroup(collisionGroup);
 
@@ -28,7 +28,7 @@ export default {
         wingfoot.body.collides([collisionGroup, playerCollisionGroup,wingfootDestroyerCollisionGroup]);
     },
     increaseSpawnSpeed(){
-        spawnDelay = spawnDelay - 500
+        spawnDelay = spawnDelay - 300
         spawnEvent.events[0].delay = spawnDelay
         
     },
