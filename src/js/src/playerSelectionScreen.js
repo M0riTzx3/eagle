@@ -11,6 +11,7 @@ function init(){
     Smaf.ready(() => {
         Smaf.on('action', tireSelection);
     });
+
 }
 
 function tireSelection(event){
@@ -59,6 +60,12 @@ function tireSelection(event){
 
 }
 
+function initTouch() {
+  $("#tire-selection-chooser img").click(function() {
+    hideTire($(".selected").attr('id'))
+    showTire($(this).attr('id'))
+  });
+}
 
 function loadTires(){
     var tireImageTags = $("#tire-selection-chooser article img");
@@ -93,5 +100,5 @@ $(document).ready(function(){
     ga('send', 'pageview');
     smafLoader();
     init();
+    initTouch();
 });
-
