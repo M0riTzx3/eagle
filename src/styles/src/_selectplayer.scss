@@ -1,7 +1,21 @@
-
 .selectPlayer{
+  background-color: darkgray;
+  margin: 1% 10%;
+  border-radius: 5px;
+  padding: 20px;
+}
 
-    margin: 1% 10%;
+.selectPlayer h2 {
+  text-align: left;
+}
+
+.description {
+  background-color: lightgray;
+  padding: 20px;
+}
+
+.description h4 {
+  margin-top: 0;
 }
 
 .road-selection-chooser{
@@ -28,7 +42,7 @@
                 border:2px solid red;
             }
 
-
+        margin-bottom: 10px;
     }
 
 }
