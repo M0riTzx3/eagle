@@ -87,6 +87,7 @@ function initGame() {
         Wingfoots.init(game, Phaser, wingfootCollisionGroup,wingfootSpawnEvent)
         // Create timer to spawn wingfoots
         // Until Game Ends
+        
        
         game.time.events.repeat(Phaser.Timer.SECOND * 10, 20, increaseSpeed, this)
         game.time.events.repeat(Phaser.Timer.SECOND * 20, 3, Wingfoots.increaseSpawnSpeed,this)
