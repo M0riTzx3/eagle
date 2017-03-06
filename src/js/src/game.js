@@ -26,7 +26,7 @@ function initGame() {
     var timeoutEvent
 
     function preload () {
-        game.load.image('road', 'images/road-seamless.jpg')
+        game.load.image('road', 'images/ViewLong.png')
         game.load.image('player', 'images/goodyear-tire-concept_128.png')
         game.load.image('wingfoot', 'images/wingfoot_128.png')
     }
@@ -71,12 +71,12 @@ function initGame() {
         game.physics.p2.enable(wingfootDestroyer)
 
         // Add score
-        Score.init(game, WIDTH-128, 32)
+        Score.init(game, WIDTH-256, 32)
 
         // Add Game End Timer
-        timer = game.time.create(false);
+        /*timer = game.time.create(false);
         timerText = game.add.text(WIDTH/2-100, 32, "Remaining Time: ", { font: "20px Arial", fill: "#ffffff", align: "left" })
-        timer.add(gameTimeLimit, gameEnd, this);
+        timer.add(gameTimeLimit, gameEnd, this);*/
 
 
         wingfootSpawnEvent = game.time.create(false);
@@ -88,8 +88,8 @@ function initGame() {
         // Create timer to spawn wingfoots
         // Until Game Ends
        
-        game.time.events.loop(Phaser.Timer.SECOND * 10, increaseSpeed, this)
-        game.time.events.repeat(Phaser.Timer.SECOND * 20, 2, Wingfoots.increaseSpawnSpeed,this)
+        game.time.events.repeat(Phaser.Timer.SECOND * 10, 20, increaseSpeed, this)
+        game.time.events.repeat(Phaser.Timer.SECOND * 20, 3, Wingfoots.increaseSpawnSpeed,this)
 
         // wingfootDestroyer 
         // set new Collision Group on Wingfoot destroyer
@@ -101,7 +101,7 @@ function initGame() {
 
         //Start all loops
         wingfootSpawnEvent.start()
-        timer.start()
+        //timer.start()
     }
 
     function gameEnd(){
@@ -157,7 +157,7 @@ function initGame() {
     function update() {
         var elapsedTime = parseInt(this.game.time.totalElapsedSeconds())
              
-        updateTimer()
+        //updateTimer()
 
         ground.autoScroll(-Math.abs(gamespeed), 0)
         player.body.rotateRight(gamespeed / 4)
