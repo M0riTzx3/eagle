@@ -26,7 +26,7 @@ function initGame() {
     var timeoutEvent
 
     function preload () {
-        game.load.image('road', 'images/ViewLong.png')
+        game.load.image('road', 'images/road-seamless.jpg')
         game.load.image('player', 'images/goodyear-tire-concept_128.png')
         game.load.image('wingfoot', 'images/wingfoot_128.png')
     }
@@ -74,22 +74,20 @@ function initGame() {
         Score.init(game, WIDTH-256, 32)
 
         // Add Game End Timer
-        /*timer = game.time.create(false);
-        timerText = game.add.text(WIDTH/2-100, 32, "Remaining Time: ", { font: "20px Arial", fill: "#ffffff", align: "left" })
-        timer.add(gameTimeLimit, gameEnd, this);*/
+        timer = game.time.create(false);
+        timerText = game.add.text(WIDTH/2-100, 32, "Remaining Time: ", { font: "26px Arial", fill: "#ffffff", align: "left" })
+        timer.add(gameTimeLimit, gameEnd, this);
 
 
         wingfootSpawnEvent = game.time.create(false);
         wingfootSpawnEvent.loop(Phaser.Timer.SECOND * 2, createWingfoot, this);
 
-        //game.time.events.loop(Phaser.Timer.SECOND * 0.5, createWingfoot, this);
-        
         Wingfoots.init(game, Phaser, wingfootCollisionGroup,wingfootSpawnEvent)
         // Create timer to spawn wingfoots
         // Until Game Ends
         
        
-        game.time.events.repeat(Phaser.Timer.SECOND * 10, 20, increaseSpeed, this)
+        game.time.events.loop(Phaser.Timer.SECOND * 10, increaseSpeed, this)
         game.time.events.repeat(Phaser.Timer.SECOND * 20, 3, Wingfoots.increaseSpawnSpeed,this)
 
         // wingfootDestroyer 
@@ -102,7 +100,7 @@ function initGame() {
 
         //Start all loops
         wingfootSpawnEvent.start()
-        //timer.start()
+        timer.start()
     }
 
     function gameEnd(){
@@ -158,7 +156,7 @@ function initGame() {
     function update() {
         var elapsedTime = parseInt(this.game.time.totalElapsedSeconds())
              
-        //updateTimer()
+        updateTimer()
 
         ground.autoScroll(-Math.abs(gamespeed), 0)
         player.body.rotateRight(gamespeed / 4)
