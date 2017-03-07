@@ -1,11 +1,9 @@
 {
   "name": "eagle360",
   "version": "1.0.0",
-  "engines":{"node": "0.6.22 || 0.8.x"},
   "description": "Eagle 360 Endless Runner",
   "main": "js/main.js",
   "scripts": {
-	"start":"node ./node_modules/node-sass/bin/node-sass styles/src/main.scss styles/dist/styles.css",
     "test": "echo \"Error: no test specified\" && exit 1",
     "buildCss": "node ./node_modules/node-sass/bin/node-sass styles/src/main.scss styles/dist/styles.css",
     "watchCss": "node ./node_modules/node-sass/bin/node-sass styles/src/main.scss styles/dist/styles.css --watch",
@@ -22,15 +20,16 @@
   "dependencies": {
 	"babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-es2015": "^6.22.0",
     "jquery": "^3.1.1",
     "phaser-ce": "^2.7.3",
 	"node-sass": "^4.5.0",
-    "webpack": "^2.2.1",
-	"local-web-server": "^1.2.6"
+    "webpack": "^2.2.1"
   },
   "devDependencies": {
+  	"babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.22.0",
     "local-web-server": "^1.2.6"
   }
 }
