@@ -1,0 +1,77 @@
+.selectPlayer{
+  background-color: darkgray;
+  margin: 1% 10%;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.selectPlayer h2 {
+  text-align: left;
+}
+
+.description {
+  background-color: lightgray;
+  padding: 20px;
+}
+
+.description h4 {
+  margin-top: 0;
+}
+
+.road-selection-chooser{
+
+    img{
+        width:300px;
+		height:250px;
+    }
+
+    .invalid{
+        opacity:0.5;
+    }
+}
+
+#tire-selection-chooser{
+    article{
+        img{
+            width:250px;
+
+
+        }
+
+        .selected{
+                border:2px solid red;
+            }
+
+        margin-bottom: 10px;
+    }
+
+}
+
+/*
+*  #### MEDIA QUERIES ####
+*/
+
+@media (max-width: 500px) {
+  .road-selection-chooser img {
+    width: 30%;
+    height: 30%;
+  }
+
+  #tire-selection-chooser article img {
+    width: 30%;
+    height: 30%;
+  }
+
+}
+
+@media (max-height: 800px) {
+  .road-selection-chooser img {
+    width: 30%;
+    height: 30%;
+  }
+
+  #tire-selection-chooser article img {
+    width: 30%;
+    height: 30%;
+  }
+}
