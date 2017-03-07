@@ -1,9 +1,11 @@
 {
   "name": "eagle360",
   "version": "1.0.0",
+  "engines":{"node": "0.6.22 || 0.8.x"},
   "description": "Eagle 360 Endless Runner",
   "main": "js/main.js",
   "scripts": {
+	"postinstall":"npm run buildCss",
     "test": "echo \"Error: no test specified\" && exit 1",
     "buildCss": "node ./node_modules/node-sass/bin/node-sass styles/src/main.scss styles/dist/styles.css",
     "watchCss": "node ./node_modules/node-sass/bin/node-sass styles/src/main.scss styles/dist/styles.css --watch",
