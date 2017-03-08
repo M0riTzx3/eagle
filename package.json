@@ -14,7 +14,8 @@
     "watchJs": "node ./node_modules/webpack/bin/webpack.js --watch",
     "buildJs": "node ./node_modules/webpack/bin/webpack.js",
     "serve": "node ./node_modules/local-web-server/bin/cli.js",
-    "start": "npm run buildCss && npm run buildJs"
+    "start": "npm run buildCss && npm run buildJs",
+	"postinstall": "npm run buildCss && npm run buildJs"
   },
   "repository": {
     "type": "git",
