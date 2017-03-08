@@ -70,7 +70,7 @@ export default {
         manageHighscore(score)
     
         setTimeout(function(){
-            window.location="/index.html?score="+score
+            window.location="index.html?score="+score
         },3000)
     }
 
