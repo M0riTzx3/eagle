@@ -26,13 +26,13 @@ function tireSelection(event){
                 category: "game-start",
                 action: "Game starts with road: "+paramsToForward.road+" and tire: "+paramsToForward.tire
             });
-            window.location = "/game.html?"+$.param(paramsToForward);
+            window.location = "game.html?"+$.param(paramsToForward);
 
 
         }
 
         if(event.command==="BACK"){
-            window.location ="/index.html";
+            window.location ="index.html";
         }
 
 
@@ -71,7 +71,7 @@ function initTouch() {
           category: "game-start",
           action: "Game starts with road: "+paramsToForward.road+" and tire: "+paramsToForward.tire
       });
-      window.location = "/game.html?"+$.param(paramsToForward);
+      window.location = "game.html?"+$.param(paramsToForward);
     } else {
       hideTire($(".selected").attr('id'))
       showTire($(this).attr('id'))
