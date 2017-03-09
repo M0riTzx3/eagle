@@ -11,38 +11,25 @@
     <script type="text/javascript" src="js/dist/startScreen-bundle.js"></script>
   </head>
 
-  <body>
+  <body class="background-360">
     <audio loop autoplay>
       <source src="sounds/Monkeys_Spinning_Monkeys.mp3" type="audio/mp3"/>
     </audio>
     <header class="logo">
-        <img src="images/logo_goodyear_1080.png" />
+      <img src="images/logo_goodyear_1080.png" />
     </header>
+    <div class="container">
 
-    <header class="startscreen">
-      <section id="score" class="invisible">
+      <section class="startscreen">
+        <h1>Eagle 360</h1>
+        <h2>Endless Runner</h2>
+        <section id="score" class="invisible">
+        </section>
+        <nav class="game-buttons">
+          <a id="startgame" href="selectplayer.html" role="button" class="btn btn-default btn-primary">Start</a>
+          <a id="exitgame" href="#" role="button" class="btn btn-default">Exit</a>
+        </nav>
       </section>
-      <h1>Eagle 360</h1>
-      <h2>Endless Runner</h2>
-      <nav>
-        <ul>
-          <li id="startgame" class="selected">
-            <a href="selectplayer.html">Start</a>
-          </li>
-          <li id="exitgame" >
-            <a href="#">Exit</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-<!--
-    <section class="eagle360">
-      <div id="360image">
-        <img src="images/eagle360_150x150_transparent.png"
-      </div>
-
-    </section>
--->
-
+    </div>
   </body>
 </html>

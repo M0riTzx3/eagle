@@ -9,13 +9,13 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "buildCss": "node ./node_modules/node-sass/bin/node-sass styles/src/main.scss styles/dist/styles.css",
+    "buildCss": "node ./node_modules/node-sass/bin/node-sass --output-style compressed styles/src/main.scss styles/dist/styles.css",
     "watchCss": "node ./node_modules/node-sass/bin/node-sass styles/src/main.scss styles/dist/styles.css --watch",
     "watchJs": "node ./node_modules/webpack/bin/webpack.js --watch",
     "buildJs": "node ./node_modules/webpack/bin/webpack.js",
     "serve": "node ./node_modules/local-web-server/bin/cli.js",
     "start": "npm run buildCss && npm run buildJs",
-	"postinstall": "npm run buildCss && npm run buildJs"
+    "postinstall": "npm run buildCss && npm run buildJs"
   },
   "repository": {
     "type": "git",
@@ -26,9 +26,10 @@
   "dependencies": {
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
+    "bootstrap": "^3.3.7",
     "jquery": "^3.1.1",
-    "phaser-ce": "^2.7.3",
     "node-sass": "^4.5.0",
+    "phaser-ce": "^2.7.3",
     "webpack": "^2.2.1"
   },
   "devDependencies": {

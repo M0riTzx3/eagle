@@ -1,11 +1,43 @@
-body {
-  background-color: #0e487b;
-  color: white;
-  font-family: sans-serif;
-  margin: 0;
-  padding: 0px;
+@import "../../node_modules/bootstrap/dist/css/bootstrap.css";
+
+$gy-blue: #0055a4;
+$gy-yellow: #ffdf1b;
+
+.background-360 {
+  background: url("../../images/360Images/eagle360-urban.jpg") no-repeat;
+  background-size: cover;
 }
 
-@import "startscreen";
-@import "selectplayer";
+.logo {
+  background: rgba(0, 85, 164, 0.8);
+  text-align: center;
+  color: $gy-yellow;
+  margin-bottom: 2em;
+  img {
+    width: 50%;
+  }
+  h1,
+  h2 {
+    margin: 0;
+  }
+}
 
+.game-buttons {
+  a {
+    display: block;
+    margin: 0 auto 1em auto;
+    width: 40%;
+  }
+}
+
+.startscreen {
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid #000;
+  border-radius: 5px;
+  text-align: center;
+  width: 50%;
+  margin: 0 auto;
+  box-shadow: 0 2px 10px $gy-blue;
+  color: #fff;
+  padding: 2em 0;
+}

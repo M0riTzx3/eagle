@@ -13,8 +13,8 @@ function init() {
         checkQuerys();
         Smaf.on('action', menuControls);
     });
-    
-    
+
+
 }
 
 function checkQuerys() {
@@ -39,7 +39,7 @@ function setScore(searchscore) {
 function handleStorageScore() {
     Smaf.storage().getItem('highscore', function(err, value) {
         if(value!=null){
-            highscore = parseInt(value); 
+            highscore = parseInt(value);
         }
          $("#score").html("<h1>You earned " + score + " Points!</h1></br><h1>Highscore: " + highscore);
     });
@@ -52,12 +52,12 @@ function storeScore() {
 
 function menuControls(selection) {
     if(selection.keyCode === 38 || selection.type === 'UP') {
-        $( "#exitgame" ).removeClass("selected");
-        $( "#startgame" ).addClass("selected");
+        $( "#exitgame" ).removeClass("active");
+        $( "#startgame" ).addClass("active");
         selectedItem = 'startgame';
     } else if (selection.keyCode === 40 || selection.type === 'DOWN') {
-        $( "#startgame" ).removeClass("selected");
-        $( "#exitgame" ).addClass("selected");
+        $( "#startgame" ).removeClass("active");
+        $( "#exitgame" ).addClass("active");
         selectedItem = 'exitgame';
     } else if (selection.keyCode === 13 || selection.type === 'ENTER') {
         if(selectedItem != null) {
@@ -68,7 +68,7 @@ function menuControls(selection) {
                 Smaf.storage().setItem("highscore", this.score);
             }
         }
-    } 
+    }
 }
 
 function getQueryParams(qs) {
