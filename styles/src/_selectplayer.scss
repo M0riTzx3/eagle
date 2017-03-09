@@ -1,5 +1,7 @@
+@import "vars";
+
 .tire-selection {
   .selected {
-    outline: 2px solid hotpink;
+    outline: 2px solid $gy-blue;
   }
 }
