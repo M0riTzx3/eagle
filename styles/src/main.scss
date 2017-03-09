@@ -22,22 +22,5 @@ $gy-yellow: #ffdf1b;
   }
 }
 
-.game-buttons {
-  a {
-    display: block;
-    margin: 0 auto 1em auto;
-    width: 40%;
-  }
-}
-
-.startscreen {
-  background: rgba(0, 0, 0, 0.9);
-  border: 1px solid #000;
-  border-radius: 5px;
-  text-align: center;
-  width: 50%;
-  margin: 0 auto;
-  box-shadow: 0 2px 10px $gy-blue;
-  color: #fff;
-  padding: 2em 0;
-}
+@import "startscreen.scss";
+@import "selectplayer.scss";

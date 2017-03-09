@@ -8,129 +8,132 @@
 
     <link rel="stylesheet" type="text/css" href="styles/dist/styles.css"></link>
 
-	<script type="text/javascript" src="js/vendor/smaf.js"></script>
-	<script type="text/javascript" src="js/dist/playerSelect-bundle.js"></script>
+    <script type="text/javascript" src="js/vendor/smaf.js"></script>
+    <script type="text/javascript" src="js/dist/playerSelect-bundle.js"></script>
   </head>
 
   <body>
     <audio loop autoplay>
-        <source src="sounds/The_Path_of_the_Goblin_King_v2.mp3" type="audio/mp3"/>
+      <source src="sounds/The_Path_of_the_Goblin_King_v2.mp3" type="audio/mp3"/>
     </audio>
 
     <header class="logo">
-        <img src="/images/logo_goodyear_1080.png" />
+      <img src="/images/logo_goodyear_1080.png" />
     </header>
 
-    <header></header>
 
-    <main class="selectPlayer">
+    <main class="container">
 
       <h2>Choose a Level</h2>
-      <div class="road-selection-chooser">
-        <article>
-          <img id="dryRoad" src="images/GameLong.png" meta"dry_road"/>
-          <img id="wetRoad" class="invalid" src="images/GameLongComingSoon.png" meta"dry_road"/>
-          <img id="snowRoad" class="invalid" src="images/GameLongComingSoon.png" meta"dry_road"/>
-          <p>This road is suited for summer tires</p>
-
+      <div class="road-selection-chooser row">
+        <article class="col-md-4">
+          <img id="dryRoad" class="img-responsive" src="images/GameLong.png"/>
         </article>
+        <article class="col-md-4">
+          <img id="wetRoad" class="invalid img-responsive" src="images/GameLongComingSoon.png"/>
+        </article>
+        <article class="col-md-4">
+          <img id="snowRoad" class="invalid img-responsive" src="images/GameLongComingSoon.png"/>
+        </article>
+        <p>This road is suited for summer tires</p>
 
-      </div>
+      </article>
+
+    </div>
 
 
 
-      <h2>Choose your tire</h2>
-      <div id="tire-selection-chooser">
-        <article>
-          <p>Select one of the below tires and press "OK" on your remote control.
+    <h2>Choose your tire</h2>
+    <div id="tire-selection-chooser">
+        <p>Select one of the below tires and press "OK" on your remote control.
           Be aware that different tires are better suited on certain levels, then others.</p>
+      <article class="tire-selection">
+        <img id="effigripco-tire" src="images/goodyear_efficientgrip.jpg"/>
+        <img id="ug9-tire" src="images/goodyear_ug9.jpg"/>
+        <img id="vec4seasg2-tire" src="images/goodyear_vector4SeasonsGen2.jpg"/>
+      </article>
 
-          <img id="effigripco-tire" src="images/goodyear_efficientgrip.jpg"/>
-          <img id="ug9-tire" src="images/goodyear_ug9.jpg"/>
-          <img id="vec4seasg2-tire" src="images/goodyear_vector4SeasonsGen2.jpg"/>
-        </article>
+      <div class="tire-description">
 
-        <div class="tire-description">
+        <div id="effigripco-tire-description" class="description">
+          <h4>EfficientGrip Compact</h4>
+          <p class="EfficientGrip Compact">
+            Der Spritspar-Sommerreifen mit langer Lebensdauer und gutem Handling bei Nässe und Trockenheit
+          </p>
+          <p class="benefits">
+            <ul>
+              <li>Gute Resistenz bei Aquaplaning aufgrund großer Mittelrillen und runder Karkasskontur</li>
+              <li>Lamellen für gutes Nasshandling</li>
+              <li>Gutes Trockenhandling durch relativ große Schulterblöcke und gleichmäßige Bodendruckverteilung</li>
+              <li>Niedriges Reifengewicht für geringen Rollwiderstand</li>
+            </ul>
+          </p>
+          <p class="gameAttributes">
+            <h4>In Game Attributes</h4>
+            <ul>
+              <li>Runs faster on dry road</li>
+              <li>Average on rainy road</li>
+              <li>Slower on snow road</li>
 
-          <div id="effigripco-tire-description" class="description">
-              <h4>EfficientGrip Compact</h4>
-              <p class="EfficientGrip Compact">
-                Der Spritspar-Sommerreifen mit langer Lebensdauer und gutem Handling bei Nässe und Trockenheit
-              </p>
-              <p class="benefits">
-                <ul>
-                  <li>Gute Resistenz bei Aquaplaning aufgrund großer Mittelrillen und runder Karkasskontur</li>
-                  <li>Lamellen für gutes Nasshandling</li>
-                  <li>Gutes Trockenhandling durch relativ große Schulterblöcke und gleichmäßige Bodendruckverteilung</li>
-                  <li>Niedriges Reifengewicht für geringen Rollwiderstand</li>
-                </ul>
-              </p>
-              <p class="gameAttributes">
-                <h4>In Game Attributes</h4>
-                <ul>
-                  <li>Runs faster on dry road</li>
-                  <li>Average on rainy road</li>
-                  <li>Slower on snow road</li>
+            </ul>
+          </p>
 
-                </ul>
-              </p>
-
-            </div>
-
-            <div id="ug9-tire-description" class="description">
-              <h4>UltraGrip 9</h4>
-              <p class="EfficientGrip Compact">
-                Herausragende Leistung bei rauesten Winterbedingungen
-              </p>
-              <p class="benefits">
-                <ul>
-                  <li>Kurzer Bremsweg auf Schnee</li>
-                  <li>Hydrodynamische Rillen zur aktiven Vermeidung von Aquaplaning</li>
-                  <li>Optimierter Laufflächenverschleißindikator</li>
-                </ul>
-              </p>
-              <p class="gameAttributes">
-                <h4>In Game Attributes</h4>
-                <ul>
-                  <li>Runs faster on snow road</li>
-                  <li>Average on rainy road</li>
-                  <li>Slower on dry roads</li>
-
-                </ul>
-              </p>
-
-            </div>
-
-           <div id="vec4seasg2-tire-description" class="description">
-              <h4>Vector 4Seasons Gen-2</h4>
-              <p class="EfficientGrip Compact">
-                Für sorgenfreies Fahren bei allen Wetterbedingungen
-              </p>
-              <p class="benefits">
-                <ul>
-                  <li>Gute Fahreigenschaften im Sommer und im Winter</li>
-                  <li>Gute Bodenhaftung bei jeder Temperatur</li>
-                  <li>Umweltfreundlich dank geringem Rollwiderstand</li>
-                </ul>
-              </p>
-              <p class="gameAttributes">
-                <h4>In Game Attributes</h4>
-                <ul>
-                  <li>Average on snow road</li>
-                  <li>Average on rainy road</li>
-                  <li>Average on dry roads</li>
-
-                </ul>
-              </p>
-
-            </div>
         </div>
 
+        <div id="ug9-tire-description" class="description">
+          <h4>UltraGrip 9</h4>
+          <p class="EfficientGrip Compact">
+            Herausragende Leistung bei rauesten Winterbedingungen
+          </p>
+          <p class="benefits">
+            <ul>
+              <li>Kurzer Bremsweg auf Schnee</li>
+              <li>Hydrodynamische Rillen zur aktiven Vermeidung von Aquaplaning</li>
+              <li>Optimierter Laufflächenverschleißindikator</li>
+            </ul>
+          </p>
+          <p class="gameAttributes">
+            <h4>In Game Attributes</h4>
+            <ul>
+              <li>Runs faster on snow road</li>
+              <li>Average on rainy road</li>
+              <li>Slower on dry roads</li>
+
+            </ul>
+          </p>
+
+        </div>
+
+        <div id="vec4seasg2-tire-description" class="description">
+          <h4>Vector 4Seasons Gen-2</h4>
+          <p class="EfficientGrip Compact">
+            Für sorgenfreies Fahren bei allen Wetterbedingungen
+          </p>
+          <p class="benefits">
+            <ul>
+              <li>Gute Fahreigenschaften im Sommer und im Winter</li>
+              <li>Gute Bodenhaftung bei jeder Temperatur</li>
+              <li>Umweltfreundlich dank geringem Rollwiderstand</li>
+            </ul>
+          </p>
+          <p class="gameAttributes">
+            <h4>In Game Attributes</h4>
+            <ul>
+              <li>Average on snow road</li>
+              <li>Average on rainy road</li>
+              <li>Average on dry roads</li>
+
+            </ul>
+          </p>
+
+        </div>
       </div>
 
-    </main>
+    </div>
 
-    <footer></footer>
+  </main>
 
-  </body>
+  <footer></footer>
+
+</body>
 </html>
