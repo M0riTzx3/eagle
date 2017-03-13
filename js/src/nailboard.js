@@ -1,11 +1,15 @@
+import GameSettings from "./gameSettings"
 let nailboards
 let game
 let collisionGroup
 let spawnEvent
 let spawnDelay
+const SPRITE_HEIGHT=GameSettings.getNailboardSprite()
 
 
 export default {
+    
+
     init(_game, Phaser, colGroup, spwnEvent) {
         game = _game
         collisionGroup = colGroup
@@ -17,8 +21,16 @@ export default {
     },
     create(gamespeed, playerCollisionGroup,nailBoardDestroyerCollisionGroup) {
         spawnDelay = spawnEvent.events[0].delay
-        const nailboard = nailboards.create(game.width, game.world.randomY, 'nailboard')
-        nailboard.body.velocity.mx=gamespeed+300
+        var randomY = game.world.randomY
+        if(randomY < SPRITE_HEIGHT){
+            randomY +=SPRITE_HEIGHT-randomY
+        }
+        if(randomY > game.height-SPRITE_HEIGHT){
+            randomY = randomY - SPRITE_HEIGHT
+        }
+        const nailboard = nailboards.create(game.width, randomY, 'nailboard')
+        nailboard.body.velocity.mx=gamespeed+200
+        
         //  Tell the panda to use the pandaCollisionGroup
         nailboard.body.setCollisionGroup(collisionGroup);
 
@@ -28,7 +40,7 @@ export default {
         nailboard.body.collides([collisionGroup, playerCollisionGroup,nailBoardDestroyerCollisionGroup]);
     },
     increaseSpawnSpeed(){
-        spawnDelay = spawnDelay - 300
+        spawnDelay = spawnDelay - 275
         spawnEvent.events[0].delay = spawnDelay
         
     },

@@ -1,8 +1,11 @@
 let wingfoots
+import GameSettings from "./gameSettings"
+
 let game
 let collisionGroup
 let spawnEvent
 let spawnDelay
+const SPRITE_HEIGHT=GameSettings.getWingfootSprite()
 
 
 export default {
@@ -17,8 +20,15 @@ export default {
     },
     create(gamespeed, playerCollisionGroup,wingfootDestroyerCollisionGroup) {
         spawnDelay = spawnEvent.events[0].delay
-        const wingfoot = wingfoots.create(game.width, game.world.randomY, 'wingfoot')
-        wingfoot.body.velocity.mx=gamespeed+300
+        var randomY = game.world.randomY
+        if(randomY < SPRITE_HEIGHT){
+            randomY +=SPRITE_HEIGHT-randomY
+        }
+        if(randomY > game.height-SPRITE_HEIGHT){
+            randomY = randomY - SPRITE_HEIGHT
+        }
+        const wingfoot = wingfoots.create(game.width, randomY, 'wingfoot')
+        wingfoot.body.velocity.mx=gamespeed+200
         //  Tell the panda to use the pandaCollisionGroup
         wingfoot.body.setCollisionGroup(collisionGroup);
 
@@ -28,7 +38,7 @@ export default {
         wingfoot.body.collides([collisionGroup, playerCollisionGroup,wingfootDestroyerCollisionGroup]);
     },
     increaseSpawnSpeed(){
-        spawnDelay = spawnDelay - 300
+        spawnDelay = spawnDelay - 275
         spawnEvent.events[0].delay = spawnDelay
         
     },

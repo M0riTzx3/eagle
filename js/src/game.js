@@ -1,13 +1,11 @@
 import Wingfoots from "./wingfoot"
 import Nailboards from "./nailboard"
 import Score from "./score"
+import GameSettings from "./gameSettings"
 
-const WIDTH = 1920
-const HEIGHT = 1080
-let gamespeed = 500
 
 function initGame() {
-    const game = new Phaser.Game(WIDTH, HEIGHT, Phaser.AUTO, '', {
+    const game = new Phaser.Game(GameSettings.getWidth(), GameSettings.getHeight(), Phaser.AUTO, '', {
         preload: preload,
         create: create,
         update: update
@@ -32,20 +30,20 @@ function initGame() {
     let cursors
     
     const gameTimeLimit = 60000;
-    const increaseGameSpeed = 300;
+    const increaseGameSpeed = 200;
     
     var timeoutEvent
 
     function preload () {
-        game.load.image('road', 'images/street_new.png')
-        game.load.image('player', 'images/goodyear-tire-concept_128.png')
-        game.load.image('wingfoot', 'images/wingfoot_128.png')
-        game.load.image('nailboard', 'images/tirekiller.png')
+        game.load.image('road', 'images/'+GameSettings.getDisplayDevice()+'/street_new.png')
+        game.load.image('player', 'images/'+GameSettings.getDisplayDevice()+'/goodyear-tire-concept.png')
+        game.load.image('wingfoot', 'images/'+GameSettings.getDisplayDevice()+'/wingfoot.png')
+        game.load.image('nailboard', 'images/'+GameSettings.getDisplayDevice()+'/tirekiller.png')
         game.load.audio('tireExplosion', ['sounds/tire_explosion.mp3', 'sounds/tire_explosion.wav']);
         
 
         // Init Game World
-        game.world.setBounds(0, 0, WIDTH, HEIGHT)
+        game.world.setBounds(0, 0, GameSettings.getWidth(), GameSettings.getHeight())
         game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
         game.scale.pageAlignHorizontally = true;
         game.scale.pageAlignVertically = true;
@@ -58,8 +56,8 @@ function initGame() {
     function create () {
 
         // Create Playfield
-        ground = game.add.tileSprite(0, 0, WIDTH, HEIGHT, 'road')
-        ground.autoScroll(-Math.abs(gamespeed), 0)
+        ground = game.add.tileSprite(0, 0, GameSettings.getWidth(), GameSettings.getHeight(), 'road')
+        ground.autoScroll(-Math.abs(GameSettings.getGamespeed()), 0)
       
 
         //Create Entities
@@ -68,6 +66,9 @@ function initGame() {
         initNailboards()
         initVoidBar()
 
+        //
+        initTouchControl()
+
         //Update CollisionGroupBounds        
         game.physics.p2.updateBoundsCollisionGroup()
         
@@ -75,15 +76,15 @@ function initGame() {
         cursors = game.input.keyboard.createCursorKeys()
         
         // Add score
-        Score.init(game, WIDTH-256, 32)
+        Score.init(game, GameSettings.getWidth()-256, 32)
 
         // Init all events
         
         wingfootSpawnEvent.loop(Phaser.Timer.SECOND * 3, createWingfoot, this);
         nailBoardSpawnEvent.loop(Phaser.Timer.SECOND * 2.5, createNailboard, this)
         game.time.events.repeat(Phaser.Timer.SECOND * 10, 10, increaseSpeed, this)
-        game.time.events.repeat(Phaser.Timer.SECOND * 8, 6, Wingfoots.increaseSpawnSpeed,this)
-        game.time.events.repeat(Phaser.Timer.SECOND * 10, 6, Nailboards.increaseSpawnSpeed,this)
+        game.time.events.repeat(Phaser.Timer.SECOND * 8, 7, Wingfoots.increaseSpawnSpeed,this)
+        game.time.events.repeat(Phaser.Timer.SECOND * 10, 7, Nailboards.increaseSpawnSpeed,this)
 
 
         //Start all loops
@@ -108,8 +109,8 @@ function initGame() {
     }
 
     function initVoidBar(){
-        var bmd = game.make.bitmapData(VOID_BAR_WIDTH, HEIGHT);
-        bmd.rect(0, 0, VOID_BAR_WIDTH, HEIGHT, 'rgba(255,0,255,0)');
+        var bmd = game.make.bitmapData(VOID_BAR_WIDTH, GameSettings.getHeight());
+        bmd.rect(0, 0, VOID_BAR_WIDTH, GameSettings.getHeight(), 'rgba(255,0,255,0)');
         voidBar = game.add.sprite(0, 0, bmd);
         game.physics.p2.enable(voidBar)
         voidBarCollisionGroup = game.physics.p2.createCollisionGroup()
@@ -124,10 +125,16 @@ function initGame() {
         Nailboards.init(game, Phaser, nailBoardCollisionGroup,nailBoardSpawnEvent)
         player.body.collides(nailBoardCollisionGroup, onNailBoardCollision, this) 
     }
+
+    function initTouchControl(){
+        game.input.addPointer();
+        
+    }
   
 
     function increaseSpeed(){
-        gamespeed += increaseGameSpeed;
+		GameSettings.setGamespeed(GameSettings.getGamespeed()+increaseGameSpeed)
+		GameSettings.setPlayerMovementSpeed(GameSettings.getPlayerMovementSpeed() + (increaseGameSpeed / 12.5))
         
     }
 
@@ -149,29 +156,52 @@ function initGame() {
     }
 
     function createWingfoot() {
-        Wingfoots.create(gamespeed, playerCollisionGroup,voidBarCollisionGroup)
+        Wingfoots.create(GameSettings.getGamespeed(), playerCollisionGroup,voidBarCollisionGroup)
     }
 
     function createNailboard() {
-        Nailboards.create(gamespeed, playerCollisionGroup,voidBarCollisionGroup)
+        Nailboards.create(GameSettings.getGamespeed(), playerCollisionGroup,voidBarCollisionGroup)
     }
 
     function update() {
         var elapsedTime = parseInt(this.game.time.totalElapsedSeconds())
 
-        ground.autoScroll(-Math.abs(gamespeed), 0)
-        player.body.rotateRight(gamespeed / 4)
+        ground.autoScroll(-Math.abs(GameSettings.getGamespeed()), 0)
+        player.body.rotateRight(GameSettings.getGamespeed() / 4)
         player.body.setZeroVelocity()
         voidBar.body.setZeroVelocity()
         //Update Score
         Score.update()
-        
+        movePlayer()     
+    }
+
+    function movePlayer(){
+        // Cursor support
         if (cursors.up.isDown) {
-            player.body.moveUp(400)
+            player.body.moveUp(GameSettings.getPlayerMovementSpeed())
         } else if (cursors.down.isDown) {
-            player.body.moveDown(400)
+            player.body.moveDown(GameSettings.getPlayerMovementSpeed())
         }
-        
+
+        //Touch support
+        if(game.input.pointer1.isDown){
+
+            if(game.input.pointer1.positionDown.y >= GameSettings.getHeight() / 2){
+                player.body.moveDown(GameSettings.getPlayerMovementSpeed())
+            } 
+            if (game.input.pointer1.positionDown.y < GameSettings.getHeight() / 2 ){
+                player.body.moveUp(GameSettings.getPlayerMovementSpeed())
+            }
+        }
+
+        //Mouse support
+        if( game.input.mousePointer.isDown){
+           if(game.input.mousePointer.positionDown.y >= GameSettings.getHeight() / 2){
+                player.body.moveDown(GameSettings.getPlayerMovementSpeed())
+            }else if (game.input.mousePointer.positionDown.y < GameSettings.getHeight() / 2 ){
+                player.body.moveUp(GameSettings.getPlayerMovementSpeed())
+            }
+        }
     }
 
 }
