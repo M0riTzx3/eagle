@@ -24,5 +24,13 @@ $gy-yellow: #ffdf1b;
   }
 }
 
+@media (max-width: 500px) {
+  .background-360 {
+    background: url("../../images/360Images/eagle360-urban-mobile.png") no-repeat;
+  }
+}
+
+
+
 @import "startscreen.scss";
 @import "selectplayer.scss";

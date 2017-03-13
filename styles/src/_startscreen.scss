@@ -20,3 +20,15 @@
   color: #fff;
   padding: 2em 0;
 }
+
+@media (max-width: 500px) {
+  .startscreen {
+     width: 90%;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 750px) {
+  .startscreen {
+     width: 60%;
+  }
+}

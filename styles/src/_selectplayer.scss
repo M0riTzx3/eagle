@@ -5,3 +5,25 @@
     outline: 2px solid $gy-blue;
   }
 }
+
+@media (max-width: 500px) {
+  
+
+}
+
+@media (min-width: 500px) and (max-width: 750px) {
+  
+
+}
+
+@media (max-width: 750px) {
+  .col-md-4 img {
+    width: 30%;
+    display: inline;
+  }
+
+  .col-md-4 {
+    display: inline;
+  }
+
+}
