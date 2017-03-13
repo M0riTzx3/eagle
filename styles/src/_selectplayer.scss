@@ -5,3 +5,39 @@
     outline: 2px solid $gy-blue;
   }
 }
+
+.container {
+  .col-md-4 {
+    width: 265px;
+  }
+  img {
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .road-selection-chooser {
+    margin-left: 10px;
+  }  
+
+  .tire-selection {
+    margin-left: 13px;
+  }
+
+}
+
+@media (min-width: 500px) and (max-width: 750px) {
+  
+
+}
+
+@media (max-width: 750px) {
+  .col-md-4 {
+    display: inline;
+    padding: 0;
+    img {
+      width: 30%;
+      display: inline;
+    }
+  }
+}

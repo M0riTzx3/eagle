@@ -17,13 +17,21 @@ $gy-yellow: #ffdf1b;
   color: $gy-yellow;
   margin-bottom: 2em;
   img {
-    width: 50%;
+    width: 25%;
   }
   h1,
   h2 {
     margin: 0;
   }
 }
+
+@media (max-width: 500px) {
+  .background-360 {
+    background: url("../../images/360Images/eagle360-urban-mobile.png") no-repeat;
+  }
+}
+
+
 
 @import "startscreen.scss";
 @import "selectplayer.scss";
