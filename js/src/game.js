@@ -30,7 +30,7 @@ function initGame() {
     let cursors
     
     const gameTimeLimit = 60000;
-    const increaseGameSpeed = 200;
+    const increaseGameSpeed = 250;
     
     var timeoutEvent
 
